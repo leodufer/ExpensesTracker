@@ -39,7 +39,7 @@ public abstract class DBA<T> {
             return dao;
     }
 
-    public T guardar(T entity){
+    public T save(T entity){
         try {
             this.getDao().create(entity);
             return entity;
@@ -50,7 +50,7 @@ public abstract class DBA<T> {
     }
 
 
-    public List<T> obtenerTodos(){
+    public List<T> queryAll(){
         try {
             return this.getDao().queryForAll();
         } catch (SQLException e) {
@@ -66,7 +66,7 @@ public abstract class DBA<T> {
         }
     }
 
-    public T obtener(int id){
+    public T select(int id){
         try {
             return this.getDao().queryForId(id);
         } catch (SQLException e) {
@@ -75,7 +75,7 @@ public abstract class DBA<T> {
         }
     }
 
-    public void actualizar(T t){
+    public void update(T t){
         try {
             this.getDao().update(t);
         } catch (SQLException e) {
