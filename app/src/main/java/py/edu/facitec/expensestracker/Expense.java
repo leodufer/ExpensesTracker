@@ -27,6 +27,12 @@ public class Expense {
         this.createAt = createAt;
     }
 
+    public Expense() {
+        this.description = "";
+        this.amount = 0;
+        this.createAt = new Date();
+    }
+
     public int getId() {
         return id;
     }
