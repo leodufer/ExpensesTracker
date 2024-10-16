@@ -6,4 +6,6 @@
     <string name="amount">Amount</string>
     <string name="description">Description</string>
     <string name="date">Date</string>
+    <string name="complete_the_description">Complete the description</string>
+    <string name="complete_the_amount">Complete the amount</string>
 </resources>
