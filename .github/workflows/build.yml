@@ -21,17 +21,12 @@ jobs:
           java-version: 17
           distribution: 'zulu' # Alternative distribution options are available.
           cache: 'gradle'
-      - name: Fix Java truststore
+      - name: Verify Java environment
         run: |
-          CACERTS="$JAVA_HOME/lib/security/cacerts"
-          echo "Checking truststore at: $CACERTS"
-          if [ -f "$CACERTS" ]; then
-            echo "Truststore found, listing certs..."
-            $JAVA_HOME/bin/keytool -list -cacerts -storepass changeit | head -20
-          else
-            echo "Truststore not found, recreating..."
-            $JAVA_HOME/bin/keytool -genkey -alias self-signed -keyalg RSA -keysize 2048 -validity 365 -keystore "$CACERTS" -storepass changeit -noprompt -dname "CN=localhost"
-          fi
+          echo "JAVA_HOME: $JAVA_HOME"
+          ls -la "$JAVA_HOME/lib/security/" | grep cacerts
+          echo "Java version:"
+          java -version
       - name: Cache SonarQube packages
         uses: actions/cache@v4
         with:
