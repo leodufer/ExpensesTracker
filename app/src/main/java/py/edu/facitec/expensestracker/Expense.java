@@ -21,16 +21,21 @@ public class Expense {
     @DatabaseField
     private Date createAt;
 
-    public Expense(String description, double amount, Date createAt) {
+    @DatabaseField
+    private boolean isIncome;
+
+    public Expense(String description, double amount, Date createAt, boolean isIncome) {
         this.description = description;
         this.amount = amount;
         this.createAt = createAt;
+        this.isIncome = isIncome;
     }
 
     public Expense() {
         this.description = "";
         this.amount = 0;
         this.createAt = new Date();
+        this.isIncome = false;
     }
 
     public int getId() {
@@ -63,6 +68,14 @@ public class Expense {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public boolean isIncome() {
+        return isIncome;
+    }
+
+    public void setIncome(boolean income) {
+        isIncome = income;
     }
 
     public String getDateDDMMYYYY(){

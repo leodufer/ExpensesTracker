@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mantenimiento de vehiculo"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="04/09/2023"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
         <TextView
             android:id="@+id/textViewAmount"
             android:layout_width="match_parent"

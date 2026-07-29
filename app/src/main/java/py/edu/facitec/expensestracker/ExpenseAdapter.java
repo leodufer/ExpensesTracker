@@ -30,11 +30,28 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
         TextView textViewDescription = convertView.findViewById(R.id.textViewDescription);
         TextView textViewMonto = convertView.findViewById(R.id.textViewAmount);
         TextView fechaTextView = convertView.findViewById(R.id.textViewDate);
+        ImageView imgType = convertView.findViewById(R.id.imgType);
 
         textViewDescription.setText(expense.getDescription());
-        textViewMonto.setText(expense.getAmount()+"");
         fechaTextView.setText(expense.getDateDDMMYYYY());
 
+        if (expense.isIncome()) {
+            imgType.setImageResource(R.drawable.ic_up);
+            textViewMonto.setTextColor(android.graphics.Color.parseColor("#2E7D32"));
+            textViewMonto.setText("+ G$. " + formatAmount(expense.getAmount()));
+        } else {
+            imgType.setImageResource(R.drawable.ic_down);
+            textViewMonto.setTextColor(android.graphics.Color.parseColor("#C62828"));
+            textViewMonto.setText("- G$. " + formatAmount(expense.getAmount()));
+        }
+
         return convertView;
+    }
+
+    private String formatAmount(double value) {
+        java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(new java.util.Locale("es", "PY"));
+        symbols.setGroupingSeparator('.');
+        java.text.DecimalFormat formatter = new java.text.DecimalFormat("#,##0", symbols);
+        return formatter.format(value);
     }
 }
