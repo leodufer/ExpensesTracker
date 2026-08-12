@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ExpenseAdapter extends ArrayAdapter<Expense> {
 
@@ -30,7 +31,7 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
         TextView fechaTextView = convertView.findViewById(R.id.textViewDate);
         ImageView imgType = convertView.findViewById(R.id.imgType);
 
-        textViewDescription.setText(expense.getDescription());
+        textViewDescription.setText(Objects.requireNonNull(expense).getDescription());
         fechaTextView.setText(expense.getDateDDMMYYYY());
 
         if (expense.isIncome()) {
