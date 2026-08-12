@@ -6,4 +6,8 @@
     <string name="amount">Amount</string>
     <string name="description">Description</string>
     <string name="date">Date</string>
+    <string name="eliminar_transacci_n">Eliminar transacción</string>
+    <string name="confirm_delete">¿Está seguro de que desea eliminar esta transacción?</string>
+    <string name="YES_TEST">Sí</string>
+    <string name="NEGATIVE_TEXT">No</string>
 </resources>

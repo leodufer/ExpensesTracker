@@ -64,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
                 Expense expense = adapter.getItem(position);
                 if (expense != null) {
                     new AlertDialog.Builder(this)
-                            .setTitle("Eliminar transacción")
-                            .setMessage("¿Está seguro de que desea eliminar esta transacción?")
-                            .setPositiveButton("Sí", (dialog, which) -> {
+                            .setTitle(R.string.eliminar_transacci_n)
+                            .setMessage(R.string.confirm_delete)
+                            .setPositiveButton(getString(R.string.YES_TEST), (dialog, which) -> {
                                 dao.delete(expense.getId());
                                 refreshData();
                             })
-                            .setNegativeButton("No", null)
+                            .setNegativeButton(getString(R.string.NEGATIVE_TEXT), null)
                             .show();
                 }
             }
