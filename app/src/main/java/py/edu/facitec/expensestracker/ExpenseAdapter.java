@@ -12,8 +12,6 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-import py.edu.facitec.expensestracker.Expense;
-
 public class ExpenseAdapter extends ArrayAdapter<Expense> {
 
     public ExpenseAdapter(@NonNull Context context, List<Expense> expenses) {

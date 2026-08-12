@@ -1,7 +1,9 @@
 package py.edu.facitec.expensestracker;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,9 +15,9 @@ import com.oss.datahelper.DataBaseManager;
 
 public abstract class DBA<T> {
 	private static final int DB_VERSION = 1;
-	private Dao<T, Integer> dao;
+	private Dao dao;
 	
-	public void init(Context context, Class clazz){
+	public void init(Context context, Class<T> clazz){
 
 
 		String dbname = context.getApplicationInfo().loadLabel(context.getPackageManager()).toString()+".sqlite";
@@ -31,11 +33,11 @@ public abstract class DBA<T> {
                                  .getHelper()
                                  .getDao(clazz);
 		} catch (SQLException e) {
-			e.printStackTrace();
+            Log.e("ERROR QUERY", Objects.requireNonNull(e.getLocalizedMessage()));
 		}
 	}
 
-    public  Dao<T, Integer> getDao(){
+    public Dao<T, Integer> getDao(){
             return dao;
     }
 
@@ -44,7 +46,7 @@ public abstract class DBA<T> {
             this.getDao().create(entity);
             return entity;
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.e("ERROR QUERY", Objects.requireNonNull(e.getLocalizedMessage()));
             return null;
         }
     }
@@ -54,15 +56,15 @@ public abstract class DBA<T> {
         try {
             return this.getDao().queryForAll();
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            Log.e("ERROR QUERY", Objects.requireNonNull(e.getLocalizedMessage()));
+            return new ArrayList<>();
         }
     }
     public void delete(int id){
         try {
             this.getDao().deleteById(id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.e("ERROR QUERY", Objects.requireNonNull(e.getLocalizedMessage()));
         }
     }
 
@@ -70,7 +72,7 @@ public abstract class DBA<T> {
         try {
             return this.getDao().queryForId(id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.e("ERROR QUERY", Objects.requireNonNull(e.getLocalizedMessage()));
             return null;
         }
     }
@@ -79,7 +81,7 @@ public abstract class DBA<T> {
         try {
             this.getDao().update(t);
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.e("ERROR QUERY", Objects.requireNonNull(e.getLocalizedMessage()));
         }
     }
 }

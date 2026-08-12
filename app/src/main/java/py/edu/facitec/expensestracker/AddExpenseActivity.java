@@ -35,10 +35,14 @@ public class AddExpenseActivity extends AppCompatActivity {
         editTextAmount.addTextChangedListener(new android.text.TextWatcher() {
             private String current = "";
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                throw new UnsupportedOperationException();
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                throw new UnsupportedOperationException();
+            }
 
             @Override
             public void afterTextChanged(android.text.Editable s) {

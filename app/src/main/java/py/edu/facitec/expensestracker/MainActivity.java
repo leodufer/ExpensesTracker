@@ -22,7 +22,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -128,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openAddExpense(View view) {
+        view.setEnabled(false);
         Intent intent = new Intent(MainActivity.this, AddExpenseActivity.class);
         startActivity(intent);
     }
@@ -150,16 +150,13 @@ public class MainActivity extends AppCompatActivity {
         }
         // Sort months descending (most recent first)
         List<String> monthList = new ArrayList<>(monthSet);
-        Collections.sort(monthList, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                try {
-                    Date d1 = sdf.parse(o1);
-                    Date d2 = sdf.parse(o2);
-                    return d2.compareTo(d1);
-                } catch (Exception ex) {
-                    return 0;
-                }
+        Collections.sort(monthList, (o1, o2) -> {
+            try {
+                Date d1 = sdf.parse(o1);
+                Date d2 = sdf.parse(o2);
+                return d2.compareTo(d1);
+            } catch (Exception ex) {
+                return 0;
             }
         });
         // Add buttons for each month
