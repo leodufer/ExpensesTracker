@@ -1,6 +1,8 @@
 package py.edu.facitec.expensestracker;
 
 import android.content.Context;
+import android.util.Log;
+
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -11,6 +13,7 @@ import org.junit.runner.RunWith;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.*;
 
@@ -27,7 +30,8 @@ public class ExpenseDaoTest {
         try {
             com.j256.ormlite.table.TableUtils.clearTable(dao.getDao().getConnectionSource(), Expense.class);
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.e("ERROR_CREATE_TABLE", Objects.requireNonNull(e.getLocalizedMessage()));
+
         }
     }
 

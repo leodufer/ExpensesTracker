@@ -11,6 +11,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.containsString;
 
+import android.util.Log;
+
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -21,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityIntegrationTest {
@@ -35,7 +38,7 @@ public class MainActivityIntegrationTest {
         try {
             com.j256.ormlite.table.TableUtils.clearTable(dao.getDao().getConnectionSource(), Expense.class);
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.e("ERROR_DAO", Objects.requireNonNull(e.getLocalizedMessage()));
         }
     }
 
