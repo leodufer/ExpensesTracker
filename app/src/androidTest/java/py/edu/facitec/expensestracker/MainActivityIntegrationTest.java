@@ -79,4 +79,33 @@ public class MainActivityIntegrationTest {
         onView(withId(R.id.textViewTotalIncome)).check(matches(withText(containsString("100.000"))));
         onView(withId(R.id.textViewAmount)).check(matches(withText(containsString("100.000"))));
     }
+
+    @Test
+    public void testExpenseSortingOrder() {
+        ExpenseDao dao = new ExpenseDao(InstrumentationRegistry.getInstrumentation().getTargetContext());
+
+        // Add an older expense (yesterday)
+        long yesterday = System.currentTimeMillis() - (24 * 60 * 60 * 1000);
+        dao.save(new Expense("Yesterday Expense", 100.0, new java.util.Date(yesterday), false));
+
+        // Add a newer expense (today)
+        dao.save(new Expense("Today Expense", 200.0, new java.util.Date(), false));
+
+        // Recreate activity to reflect changes (or trigger refresh)
+        activityRule.getScenario().onActivity(MainActivity::onResume);
+
+        // Verify "Today Expense" is at position 0
+        onData(anything())
+                .inAdapterView(withId(R.id.listViewExpense))
+                .atPosition(0)
+                .onChildView(withId(R.id.textViewDescription))
+                .check(matches(withText("Today Expense")));
+
+        // Verify "Yesterday Expense" is at position 1
+        onData(anything())
+                .inAdapterView(withId(R.id.listViewExpense))
+                .atPosition(1)
+                .onChildView(withId(R.id.textViewDescription))
+                .check(matches(withText("Yesterday Expense")));
+    }
 }

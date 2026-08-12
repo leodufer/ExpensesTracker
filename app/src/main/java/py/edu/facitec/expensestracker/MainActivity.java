@@ -93,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
         allExpenses.clear();
         allExpenses.addAll(expenses);
 
+        // Sort expenses by date descending (most recent first)
+        Collections.sort(allExpenses, (e1, e2) -> e2.getCreateAt().compareTo(e1.getCreateAt()));
+
         // Populate month filter UI based on loaded expenses
         populateMonthFilterContainer();
 
